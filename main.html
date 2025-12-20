@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VORTEX</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Home Screen -->
+    <div id="home-screen">
+        <h1 class="title">VORTEX</h1>
+        <p class="subtitle">Unleash the Power</p>
+        <div class="options">
+            <button onclick="showSection('games')">Games</button>
+            <button onclick="showSection('apps')">Apps</button>
+        </div>
+    </div>
+
+    <!-- Games Section -->
+    <div id="games-section" class="section" style="display: none;">
+        <button class="back-btn" onclick="showHome()">← Back</button>
+        <h1 class="section-title">VORTEX Games</h1>
+        
+        <div class="game-list">
+            <div class="game-card">
+                <h2>Five Nights at Freddy's 1</h2>
+                <button onclick="loadContent('https://irv77.github.io/hd_fnaf/1/', 'games')">Play</button>
+            </div>
+            
+            <div class="game-card">
+                <h2>Five Nights at Freddy's 2</h2>
+                <button onclick="loadContent('https://irv77.github.io/hd_fnaf/2/', 'games')">Play</button>
+            </div>
+            
+            <div class="game-card">
+                <h2>Five Nights at Freddy's 3</h2>
+                <button onclick="loadContent('https://irv77.github.io/hd_fnaf/3/', 'games')">Play</button>
+            </div>
+            
+            <div class="game-card">
+                <h2>Five Nights at Freddy's 4</h2>
+                <button onclick="loadContent('https://irv77.github.io/hd_fnaf/4/', 'games')">Play</button>
+            </div>
+            
+            <div class="game-card">
+                <h2>Five Nights at Freddy's World</h2>
+                <button onclick="loadContent('https://irv77.github.io/hd_fnaf/w/', 'games')">Play</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Apps Section -->
+    <div id="apps-section" class="section" style="display: none;">
+        <button class="back-btn" onclick="showHome()">← Back</button>
+        <h1 class="section-title">VORTEX Apps</h1>
+        
+        <div class="game-list">
+            <div class="game-card">
+                <h2>Interstellar Proxy</h2>
+                <p style="color: #00aaff; font-size: 0.9em;">Fast proxy with games, cloaking & more</p>
+                <button onclick="loadContent('https://darklight.neo-space.space', 'apps')">Launch</button>
+            </div>
+            
+            <div class="game-card">
+                <h2>Space Proxy</h2>
+                <p style="color: #00aaff; font-size: 0.9em;">Another powerful web proxy</p>
+                <button onclick="loadContent('https://dash.ddnssec.de', 'apps')">Launch</button>
+            </div>
+            
+            <div class="game-card">
+                <h2>DaydreamX Proxy</h2>
+                <p style="color: #00aaff; font-size: 0.9em;">Advanced web proxy & unblocker</p>
+                <button onclick="loadContent('https://shop.ddnssec.de/', 'apps')">Launch</button>
+            </div>
+            
+            <!-- Add more apps here -->
+        </div>
+    </div>
+
+    <!-- Player Area (Games & Apps) -->
+    <div id="game-player" class="player" style="display: none;">
+        <div class="player-controls">
+            <button class="back-btn" onclick="hideContent()">← Back to List</button>
+            <button class="fullscreen-btn" onclick="toggleFullscreen()">⛶ Fullscreen</button>
+        </div>
+        <iframe id="content-iframe" frameborder="0" allowfullscreen allow="fullscreen"></iframe>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
