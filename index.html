@@ -19,93 +19,195 @@
 
     <!-- Games Section -->
     <div id="games-section" class="section" style="display: none;">
-        <div class="section-header">
-            <button class="back-btn" onclick="showHome()">← Back</button>
-            <h1 class="section-title">VORTEX Games</h1>
-        </div>
+        <button class="back-btn" onclick="showHome()">← Back</button>
+        <h1 class="section-title">VORTEX Games</h1>
         
-        <div class="scrollable-list">
-            <div class="game-list">
-                <div class="game-card">
-                    <h2>Five Nights at Freddy's 1</h2>
-                    <button onclick="loadContent('https://irv77.github.io/hd_fnaf/1/', 'games')">Play</button>
-                </div>
-                <div class="game-card">
-                    <h2>Five Nights at Freddy's 2</h2>
-                    <button onclick="loadContent('https://irv77.github.io/hd_fnaf/2/', 'games')">Play</button>
-                </div>
-                <div class="game-card">
-                    <h2>Five Nights at Freddy's 3</h2>
-                    <button onclick="loadContent('https://irv77.github.io/hd_fnaf/3/', 'games')">Play</button>
-                </div>
-                <div class="game-card">
-                    <h2>Five Nights at Freddy's 4</h2>
-                    <button onclick="loadContent('https://irv77.github.io/hd_fnaf/4/', 'games')">Play</button>
-                </div>
-                <div class="game-card">
-                    <h2>Five Nights at Freddy's World</h2>
-                    <button onclick="loadContent('https://irv77.github.io/hd_fnaf/w/', 'games')">Play</button>
-                </div>
-                <div class="game-card">
-                    <h2>Slope</h2>
-                    <p style="color: #00aaff; font-size: 0.9em;">Endless high-speed ball rolling</p>
-                    <button onclick="loadContent('https://slope3.com', 'games')">Play</button>
-                </div>
-                <div class="game-card">
-                    <h2>Geometry Dash</h2>
-                    <p style="color: #00aaff; font-size: 0.9em;">Rhythm platformer</p>
-                    <button onclick="loadContent('https://geometrydash-lite.io', 'games')">Play</button>
-                </div>
-                <div class="game-card">
-                    <h2>Subway Surfers</h2>
-                    <p style="color: #00aaff; font-size: 0.9em;">Classic endless runner</p>
-                    <button onclick="loadContent('https://slope3.com/subway-surfers', 'games')">Play</button>
-                </div>
+        <div class="game-list">
+            <!-- FNAF Series -->
+            <div class="game-card">
+                <h2>Five Nights at Freddy's 1</h2>
+                <button onclick="loadContent('https://irv77.github.io/hd_fnaf/1/', 'games')">Play</button>
+            </div>
+            <div class="game-card">
+                <h2>Five Nights at Freddy's 2</h2>
+                <button onclick="loadContent('https://irv77.github.io/hd_fnaf/2/', 'games')">Play</button>
+            </div>
+            <div class="game-card">
+                <h2>Five Nights at Freddy's 3</h2>
+                <button onclick="loadContent('https://irv77.github.io/hd_fnaf/3/', 'games')">Play</button>
+            </div>
+            <div class="game-card">
+                <h2>Five Nights at Freddy's 4</h2>
+                <button onclick="loadContent('https://irv77.github.io/hd_fnaf/4/', 'games')">Play</button>
+            </div>
+            <div class="game-card">
+                <h2>Five Nights at Freddy's World</h2>
+                <button onclick="loadContent('https://irv77.github.io/hd_fnaf/w/', 'games')">Play</button>
+            </div>
+            
+            <!-- Geometry Dash -->
+            <div class="game-card">
+                <h2>Geometry Dash</h2>
+                <p style="color: #00aaff; font-size: 0.9em;">Rhythm platformer</p>
+                <button onclick="loadContent('https://geometrydash-lite.io', 'games')">Play</button>
+            </div>
+            
+            <!-- Previous Games -->
+            <div class="game-card">
+                <h2>Slope</h2>
+                <p style="color: #00aaff; font-size: 0.9em;">Endless high-speed ball rolling</p>
+                <button onclick="loadContent('https://slope3.com/', 'games')">Play</button>
+            </div>
+            <div class="game-card">
+                <h2>Retro Bowl</h2>
+                <p style="color: #00aaff; font-size: 0.9em;">Retro football management</p>
+                <button onclick="loadContent('https://retrobowl.me/', 'games')">Play</button>
+            </div>
+            <div class="game-card">
+                <h2>Basketball Stars</h2>
+                <p style="color: #00aaff; font-size: 0.9em;">1v1 basketball showdowns</p>
+                <button onclick="loadContent('https://basketball-stars.io/', 'games')">Play</button>
+            </div>
+            <div class="game-card">
+                <h2>Moto X3M</h2>
+                <p style="color: #00aaff; font-size: 0.9em;">Insane bike stunts</p>
+                <button onclick="loadContent('https://unblocked-games.s3.amazonaws.com/moto-x3m.html', 'games')">Play</button>
+            </div>
+            <div class="game-card">
+                <h2>Run 3</h2>
+                <p style="color: #00aaff; font-size: 0.9em;">Endless space runner</p>
+                <button onclick="loadContent('https://run-3online.github.io/', 'games')">Play</button>
+            </div>
+            <div class="game-card">
+                <h2>1v1.LOL</h2>
+                <p style="color: #00aaff; font-size: 0.9em;">Building & shooting battle</p>
+                <button onclick="loadContent('https://1v1-lol-online.github.io', 'games')">Play</button>
+            </div>
+            <div class="game-card">
+                <h2>Shell Shockers</h2>
+                <p style="color: #00aaff; font-size: 0.9em;">Egg-based FPS chaos</p>
+                <button onclick="loadContent('https://shellshock.io/', 'games')">Play</button>
+            </div>
+            <div class="game-card">
+                <h2>Krunker</h2>
+                <p style="color: #00aaff; font-size: 0.9em;">Fast-paced voxel FPS</p>
+                <button onclick="loadContent('https://krunker.io/', 'games')">Play</button>
+            </div>
+            <div class="game-card">
+                <h2>Paper.io 2</h2>
+                <p style="color: #00aaff; font-size: 0.9em;">Conquer the map</p>
+                <button onclick="loadContent('https://paper-io.com/', 'games')">Play</button>
+            </div>
+            <div class="game-card">
+                <h2>Hole.io</h2>
+                <p style="color: #00aaff; font-size: 0.9em;">Eat the city as a black hole</p>
+                <button onclick="loadContent('https://hole-io.com/', 'games')">Play</button>
+            </div>
+            <div class="game-card">
+                <h2>Smash Karts</h2>
+                <p style="color: #00aaff; font-size: 0.9em;">Kart racing with weapons</p>
+                <button onclick="loadContent('https://smashkarts.io/', 'games')">Play</button>
+            </div>
+            <div class="game-card">
+                <h2>Monkey Mart</h2>
+                <p style="color: #00aaff; font-size: 0.9em;">Manage your monkey store</p>
+                <button onclick="loadContent('https://monkey-mart.io/', 'games')">Play</button>
+            </div>
+            <div class="game-card">
+                <h2>Temple Run 2</h2>
+                <p style="color: #00aaff; font-size: 0.9em;">Endless temple escape</p>
+                <button onclick="loadContent('https://templerun.ee/', 'games')">Play</button>
+            </div>
+            <div class="game-card">
+                <h2>Subway Surfers</h2>
+                <p style="color: #00aaff; font-size: 0.9em;">Iconic endless runner</p>
+                <button onclick="loadContent('https://subway-surfers.gg/', 'games')">Play</button>
+            </div>
+            <div class="game-card">
+                <h2>Bloons TD 6</h2>
+                <p style="color: #00aaff; font-size: 0.9em;">Epic tower defense</p>
+                <button onclick="loadContent('https://ninjakiwi.com/Games/Bloons-Tower-Defense/Bloons-TD-6.html', 'games')">Play</button>
+            </div>
+            <div class="game-card">
+                <h2>Among Us</h2>
+                <p style="color: #00aaff; font-size: 0.9em;">Social deduction multiplayer</p>
+                <button onclick="loadContent('https://amongusonline.io/', 'games')">Play</button>
+            </div>
+            
+            <!-- 10 New Games -->
+            <div class="game-card">
+                <h2>Bitlife</h2>
+                <p style="color: #00aaff; font-size: 0.9em;">Life choices simulator</p>
+                <button onclick="loadContent('https://bitlifeonline.io/', 'games')">Play</button>
+            </div>
+            <div class="game-card">
+                <h2>Cookie Clicker</h2>
+                <p style="color: #00aaff; font-size: 0.9em;">Idle baking empire</p>
+                <button onclick="loadContent('https://cookieclicker.ee/', 'games')">Play</button>
+            </div>
+            <div class="game-card">
+                <h2>Drift Hunters</h2>
+                <p style="color: #00aaff; font-size: 0.9em;">Car drifting mastery</p>
+                <button onclick="loadContent('https://drifthunters.io/', 'games')">Play</button>
+            </div>
+            <div class="game-card">
+                <h2>OvO</h2>
+                <p style="color: #00aaff; font-size: 0.9em;">Precision platformer</p>
+                <button onclick="loadContent('https://ovo-game.com/', 'games')">Play</button>
+            </div>
+            <div class="game-card">
+                <h2>Tetris</h2>
+                <p style="color: #00aaff; font-size: 0.9em;">Classic block puzzle</p>
+                <button onclick="loadContent('https://tetrisunblocked.org/', 'games')">Play</button>
+            </div>
+            <div class="game-card">
+                <h2>Basket Random</h2>
+                <p style="color: #00aaff; font-size: 0.9em;">Wacky physics basketball</p>
+                <button onclick="loadContent('https://basketrandom.io/', 'games')">Play</button>
+            </div>
+            <div class="game-card">
+                <h2>Doodle Jump</h2>
+                <p style="color: #00aaff; font-size: 0.9em;">Endless jumping adventure</p>
+                <button onclick="loadContent('https://doodlejump.io/', 'games')">Play</button>
+            </div>
+            <div class="game-card">
+                <h2>Fireboy and Watergirl</h2>
+                <p style="color: #00aaff; font-size: 0.9em;">Co-op element puzzles</p>
+                <button onclick="loadContent('https://fireboyandwatergirl.io/', 'games')">Play</button>
+            </div>
+            <div class="game-card">
+                <h2>Happy Wheels</h2>
+                <p style="color: #00aaff; font-size: 0.9em;">Ragdoll physics mayhem</p>
+                <button onclick="loadContent('https://happywheels.io/', 'games')">Play</button>
+            </div>
+            <div class="game-card">
+                <h2>Tanuki Sunset</h2>
+                <p style="color: #00aaff; font-size: 0.9em;">Raccoon skateboarding</p>
+                <button onclick="loadContent('https://tanukisunset.io/', 'games')">Play</button>
             </div>
         </div>
     </div>
 
     <!-- Apps Section -->
     <div id="apps-section" class="section" style="display: none;">
-        <div class="section-header">
-            <button class="back-btn" onclick="showHome()">← Back</button>
-            <h1 class="section-title">VORTEX Apps</h1>
-        </div>
+        <button class="back-btn" onclick="showHome()">← Back</button>
+        <h1 class="section-title">VORTEX Apps</h1>
         
-        <div class="scrollable-list">
-            <div class="game-list">
-                <div class="game-card">
-                    <h2>Interstellar Proxy</h2>
-                    <p style="color: #00aaff; font-size: 0.9em;">Fast proxy with games & cloaking</p>
-                    <button onclick="loadContent('https://darklight.neo-space.space', 'apps')">Launch</button>
-                </div>
-                <div class="game-card">
-                    <h2>Space Proxy</h2>
-                    <p style="color: #00aaff; font-size: 0.9em;">Another powerful web proxy</p>
-                    <button onclick="loadContent('https://dash.ddnssec.de', 'apps')">Launch</button>
-                </div>
-                <div class="game-card">
-                    <h2>DaydreamX Proxy</h2>
-                    <p style="color: #00aaff; font-size: 0.9em;">Advanced web proxy & unblocker</p>
-                    <button onclick="loadContent('https://shop.ddnssec.de/', 'apps')">Launch</button>
-                </div>
-                <div class="game-card">
-                    <h2>CloudMoon</h2>
-                    <p style="color: #00aaff; font-size: 0.9em;">Cloud gaming – play AAA/mobile games in browser</p>
-                    <button onclick="loadContent('https://web.cloudmoonapp.com/', 'apps')">Launch</button>
-                </div>
-                <div class="game-card">
-                    <h2>CloudMoon Backup</h2>
-                    <p style="color: #00aaff; font-size: 0.9em;">Alternative CloudMoon deployment</p>
-                    <button onclick="loadContent('https://cloudmoonapp.pages.dev/', 'apps')">Launch</button>
-                </div>
-                
-                <!-- NEW APP -->
-                <div class="game-card">
-                    <h2>RETRO</h2>
-                    <p style="color: #00aaff; font-size: 0.9em;">Retro Bowl – classic football management</p>
-                    <button onclick="loadContent('https://retrobowlgames.io', 'apps')">Launch</button>
-                </div>
+        <div class="game-list">
+            <div class="game-card">
+                <h2>Interstellar Proxy</h2>
+                <p style="color: #00aaff; font-size: 0.9em;">Fast proxy with games & cloaking</p>
+                <button onclick="loadContent('https://darklight.neo-space.space', 'apps')">Launch</button>
+            </div>
+            <div class="game-card">
+                <h2>Space Proxy</h2>
+                <p style="color: #00aaff; font-size: 0.9em;">Another powerful web proxy</p>
+                <button onclick="loadContent('https://dash.ddnssec.de', 'apps')">Launch</button>
+            </div>
+            <div class="game-card">
+                <h2>DaydreamX Proxy</h2>
+                <p style="color: #00aaff; font-size: 0.9em;">Advanced web proxy & unblocker</p>
+                <button onclick="loadContent('https://shop.ddnssec.de/', 'apps')">Launch</button>
             </div>
         </div>
     </div>
@@ -113,9 +215,81 @@
     <!-- Full-Screen Player -->
     <div id="player" class="player" style="display: none;">
         <button class="back-overlay" onclick="hideContent()">← Back</button>
-        <iframe id="content-iframe" frameborder="0" allowfullscreen allow="fullscreen"></iframe>
+        
+        <!-- Loading Spinner/Message -->
+        <div id="loading-spinner" class="loading-spinner">
+            <div class="spinner"></div>
+            <p>Loading Game...</p>
+        </div>
+        
+        <iframe id="content-iframe" 
+                frameborder="0" 
+                allowfullscreen 
+                allow="fullscreen"
+                onload="document.getElementById('loading-spinner').style.display='none';">
+        </iframe>
     </div>
+<script>
+// Reactive Cursor Background
+document.addEventListener('mousemove', (e) => {
+    const x = (e.clientX / window.innerWidth) * 100;
+    const y = (e.clientY / window.innerHeight) * 100;
+    document.body.style.setProperty('--mouse-x', `${x}%`);
+    document.body.style.setProperty('--mouse-y', `${y}%`);
+});
 
+// Optional: Custom cursor dot (uncomment if you want a glowing dot)
+// const cursor = document.createElement('div');
+// cursor.style.position = 'fixed';
+// cursor.style.width = '20px';
+// cursor.style.height = '20px';
+// cursor.style.background = 'radial-gradient(circle, #00ffff 0%, transparent 70%)';
+// cursor.style.borderRadius = '50%';
+// cursor.style.pointerEvents = 'none';
+// cursor.style.zIndex = '9999';
+// cursor.style.mixBlendMode = 'difference';
+// document.body.appendChild(cursor);
+
+// document.addEventListener('mousemove', (e) => {
+//     cursor.style.left = `${e.clientX - 10}px`;
+//     cursor.style.top = `${e.clientY - 10}px`;
+// });
+</script>
+<script>
+// Continuous Blue Trail Effect with Fade-Out
+document.addEventListener('mousemove', (e) => {
+    // Create a new particle
+    const particle = document.createElement('div');
+    particle.classList.add('trail-particle');
+    
+    // Random size for variety (5-15px)
+    const size = Math.random() * 10 + 5;
+    particle.style.width = `${size}px`;
+    particle.style.height = `${size}px`;
+    
+    // Position exactly at cursor
+    particle.style.left = `${e.clientX}px`;
+    particle.style.top = `${e.clientY}px`;
+    
+    // Slight random offset for natural spread
+    const offsetX = Math.random() * 20 - 10;
+    const offsetY = Math.random() * 20 - 10;
+    particle.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+
+    // Random fade duration (0.8s to 1.5s) so they don't all disappear at once
+    const duration = Math.random() * 0.7 + 0.8;
+    particle.style.animationDuration = `${duration}s`;
+
+    document.body.appendChild(particle);
+
+    // Remove particle after animation completes
+    particle.addEventListener('animationend', () => {
+        particle.remove();
+    });
+});
+</script>
     <script src="script.js"></script>
 </body>
+<!-- Custom Cursor Orb -->
+<div id="cursor-orb"></div>
 </html>
