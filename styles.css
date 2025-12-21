@@ -243,3 +243,95 @@ body {
     from { opacity: 0.6; }
     to { opacity: 1; }
 }
+/* Login Screen */
+#login-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.login-box {
+    background: #001122;
+    padding: 40px;
+    border: 3px solid #00ffff;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 0 50px #00ffff;
+}
+
+.login-box input {
+    padding: 15px;
+    width: 80%;
+    margin: 20px 0;
+    background: #000;
+    border: 2px solid #00ffff;
+    color: #00ffff;
+    font-size: 1.2em;
+    border-radius: 10px;
+}
+
+.login-box button {
+    padding: 15px 40px;
+    background: #00aaff;
+    color: #000;
+    border: none;
+    font-size: 1.3em;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* Admin Panel */
+#admin-panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.admin-box {
+    background: #001122;
+    padding: 40px;
+    border: 3px solid #00ffff;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 0 50px #00ffff;
+    width: 400px;
+}
+
+.admin-box input {
+    padding: 12px;
+    width: 70%;
+    margin: 10px 0;
+    background: #000;
+    border: 2px solid #00ffff;
+    color: #00ffff;
+    border-radius: 8px;
+}
+
+/* Logout Button (Top Right) */
+.logout-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: #ff0000;
+    color: white;
+    border: 2px solid #ff0000;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    cursor: pointer;
+    border-radius: 8px;
+    z-index: 1000;
+}
