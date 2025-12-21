@@ -27,7 +27,6 @@
         <div class="admin-box">
             <h2>Admin Panel</h2>
 
-            <!-- Add New Passwords -->
             <div style="margin-bottom: 20px;">
                 <input type="text" id="new-admin-pass" placeholder="New Admin Password">
                 <button onclick="addAdminPassword()">Add Admin Password</button>
@@ -37,13 +36,11 @@
                 <button onclick="addUserPassword()">Add User Password</button>
             </div>
 
-            <!-- Delete Password -->
             <div style="margin-bottom: 30px;">
                 <input type="text" id="delete-pass" placeholder="Type password to delete">
                 <button onclick="deletePassword()" style="background: #ff4444;">Delete Password</button>
             </div>
 
-            <!-- Activity Log -->
             <h3 style="margin-top: 30px;">Activity Log</h3>
             <div id="activity-log" style="max-height: 300px; overflow-y: auto; background: #001122; padding: 15px; border-radius: 10px; border: 1px solid #00ffff;">
                 Loading logs...
@@ -64,6 +61,7 @@
             <div class="options">
                 <button onclick="showSection('games')">Games</button>
                 <button onclick="showSection('apps')">Apps</button>
+                <button onclick="showSection('instructions')">Instructions</button>
                 <button onclick="showAdmin()" id="admin-btn" style="display: none;">Admin Panel</button>
             </div>
         </div>
@@ -74,10 +72,43 @@
             <h1 class="section-title">VORTEX Games</h1>
             
             <div class="game-list">
-                <!-- All your 30+ games -->
-                <div class="game-card"><h2>Five Nights at Freddy's 1</h2><button onclick="loadContent('https://irv77.github.io/hd_fnaf/1/', 'games')">Play</button></div>
-                <!-- ... (keep all your games from previous version) ... -->
-                <div class="game-card"><h2>Tanuki Sunset</h2><p style="color: #00aaff; font-size: 0.9em;">Raccoon skateboarding</p><button onclick="loadContent('https://tanukisunset.io/', 'games')">Play</button></div>
+                <!-- FNAF Series -->
+                <div class="game-card"><h2>Five Nights at Freddy's 1</h2><button onclick="copyLink('https://irv77.github.io/hd_fnaf/1/')">Copy Link</button></div>
+                <div class="game-card"><h2>Five Nights at Freddy's 2</h2><button onclick="copyLink('https://irv77.github.io/hd_fnaf/2/')">Copy Link</button></div>
+                <div class="game-card"><h2>Five Nights at Freddy's 3</h2><button onclick="copyLink('https://irv77.github.io/hd_fnaf/3/')">Copy Link</button></div>
+                <div class="game-card"><h2>Five Nights at Freddy's 4</h2><button onclick="copyLink('https://irv77.github.io/hd_fnaf/4/')">Copy Link</button></div>
+                <div class="game-card"><h2>Five Nights at Freddy's World</h2><button onclick="copyLink('https://irv77.github.io/hd_fnaf/w/')">Copy Link</button></div>
+                
+                <!-- Geometry Dash -->
+                <div class="game-card"><h2>Geometry Dash</h2><p style="color: #00aaff; font-size: 0.9em;">Rhythm platformer</p><button onclick="copyLink('https://geometrydash-lite.io')">Copy Link</button></div>
+                
+                <!-- All Other Games -->
+                <div class="game-card"><h2>Slope</h2><p style="color: #00aaff; font-size: 0.9em;">Endless high-speed ball rolling</p><button onclick="copyLink('https://slope3.com/')">Copy Link</button></div>
+                <div class="game-card"><h2>Retro Bowl</h2><p style="color: #00aaff; font-size: 0.9em;">Retro football management</p><button onclick="copyLink('https://retrobowl.me/')">Copy Link</button></div>
+                <div class="game-card"><h2>Basketball Stars</h2><p style="color: #00aaff; font-size: 0.9em;">1v1 basketball showdowns</p><button onclick="copyLink('https://basketball-stars.io/')">Copy Link</button></div>
+                <div class="game-card"><h2>Moto X3M</h2><p style="color: #00aaff; font-size: 0.9em;">Insane bike stunts</p><button onclick="copyLink('https://unblocked-games.s3.amazonaws.com/moto-x3m.html')">Copy Link</button></div>
+                <div class="game-card"><h2>Run 3</h2><p style="color: #00aaff; font-size: 0.9em;">Endless space runner</p><button onclick="copyLink('https://run-3online.github.io/')">Copy Link</button></div>
+                <div class="game-card"><h2>1v1.LOL</h2><p style="color: #00aaff; font-size: 0.9em;">Building & shooting battle</p><button onclick="copyLink('https://1v1-lol-online.github.io')">Copy Link</button></div>
+                <div class="game-card"><h2>Shell Shockers</h2><p style="color: #00aaff; font-size: 0.9em;">Egg-based FPS chaos</p><button onclick="copyLink('https://shellshock.io/')">Copy Link</button></div>
+                <div class="game-card"><h2>Krunker</h2><p style="color: #00aaff; font-size: 0.9em;">Fast-paced voxel FPS</p><button onclick="copyLink('https://krunker.io/')">Copy Link</button></div>
+                <div class="game-card"><h2>Paper.io 2</h2><p style="color: #00aaff; font-size: 0.9em;">Conquer the map</p><button onclick="copyLink('https://paper-io.com/')">Copy Link</button></div>
+                <div class="game-card"><h2>Hole.io</h2><p style="color: #00aaff; font-size: 0.9em;">Eat the city as a black hole</p><button onclick="copyLink('https://hole-io.com/')">Copy Link</button></div>
+                <div class="game-card"><h2>Smash Karts</h2><p style="color: #00aaff; font-size: 0.9em;">Kart racing with weapons</p><button onclick="copyLink('https://smashkarts.io/')">Copy Link</button></div>
+                <div class="game-card"><h2>Monkey Mart</h2><p style="color: #00aaff; font-size: 0.9em;">Manage your monkey store</p><button onclick="copyLink('https://monkey-mart.io/')">Copy Link</button></div>
+                <div class="game-card"><h2>Temple Run 2</h2><p style="color: #00aaff; font-size: 0.9em;">Endless temple escape</p><button onclick="copyLink('https://templerun.ee/')">Copy Link</button></div>
+                <div class="game-card"><h2>Subway Surfers</h2><p style="color: #00aaff; font-size: 0.9em;">Iconic endless runner</p><button onclick="copyLink('https://subway-surfers.gg/')">Copy Link</button></div>
+                <div class="game-card"><h2>Bloons TD 6</h2><p style="color: #00aaff; font-size: 0.9em;">Epic tower defense</p><button onclick="copyLink('https://ninjakiwi.com/Games/Bloons-Tower-Defense/Bloons-TD-6.html')">Copy Link</button></div>
+                <div class="game-card"><h2>Among Us</h2><p style="color: #00aaff; font-size: 0.9em;">Social deduction multiplayer</p><button onclick="copyLink('https://amongusonline.io/')">Copy Link</button></div>
+                <div class="game-card"><h2>Bitlife</h2><p style="color: #00aaff; font-size: 0.9em;">Life choices simulator</p><button onclick="copyLink('https://bitlifeonline.io/')">Copy Link</button></div>
+                <div class="game-card"><h2>Cookie Clicker</h2><p style="color: #00aaff; font-size: 0.9em;">Idle baking empire</p><button onclick="copyLink('https://cookieclicker.ee/')">Copy Link</button></div>
+                <div class="game-card"><h2>Drift Hunters</h2><p style="color: #00aaff; font-size: 0.9em;">Car drifting mastery</p><button onclick="copyLink('https://drifthunters.io/')">Copy Link</button></div>
+                <div class="game-card"><h2>OvO</h2><p style="color: #00aaff; font-size: 0.9em;">Precision platformer</p><button onclick="copyLink('https://ovo-game.com/')">Copy Link</button></div>
+                <div class="game-card"><h2>Tetris</h2><p style="color: #00aaff; font-size: 0.9em;">Classic block puzzle</p><button onclick="copyLink('https://tetrisunblocked.org/')">Copy Link</button></div>
+                <div class="game-card"><h2>Basket Random</h2><p style="color: #00aaff; font-size: 0.9em;">Wacky physics basketball</p><button onclick="copyLink('https://basketrandom.io/')">Copy Link</button></div>
+                <div class="game-card"><h2>Doodle Jump</h2><p style="color: #00aaff; font-size: 0.9em;">Endless jumping adventure</p><button onclick="copyLink('https://doodlejump.io/')">Copy Link</button></div>
+                <div class="game-card"><h2>Fireboy and Watergirl</h2><p style="color: #00aaff; font-size: 0.9em;">Co-op element puzzles</p><button onclick="copyLink('https://fireboyandwatergirl.io/')">Copy Link</button></div>
+                <div class="game-card"><h2>Happy Wheels</h2><p style="color: #00aaff; font-size: 0.9em;">Ragdoll physics mayhem</p><button onclick="copyLink('https://happywheels.io/')">Copy Link</button></div>
+                <div class="game-card"><h2>Tanuki Sunset</h2><p style="color: #00aaff; font-size: 0.9em;">Raccoon skateboarding</p><button onclick="copyLink('https://tanukisunset.io/')">Copy Link</button></div>
             </div>
         </div>
 
@@ -87,9 +118,41 @@
             <h1 class="section-title">VORTEX Apps</h1>
             
             <div class="game-list">
-                <div class="game-card"><h2>Interstellar Proxy</h2><p style="color: #00aaff; font-size: 0.9em;">Fast proxy with games & cloaking</p><button onclick="loadContent('https://darklight.neo-space.space', 'apps')">Launch</button></div>
-                <div class="game-card"><h2>Space Proxy</h2><p style="color: #00aaff; font-size: 0.9em;">Another powerful web proxy</p><button onclick="loadContent('https://dash.ddnssec.de', 'apps')">Launch</button></div>
-                <div class="game-card"><h2>DaydreamX Proxy</h2><p style="color: #00aaff; font-size: 0.9em;">Advanced web proxy & unblocker</p><button onclick="loadContent('https://shop.ddnssec.de/', 'apps')">Launch</button></div>
+                <div class="game-card">
+                    <h2>Interstellar Proxy</h2>
+                    <p style="color: #00aaff; font-size: 0.9em;">Fast proxy with games & cloaking</p>
+                    <button onclick="loadContent('https://interstellar-fr.vercel.app', 'apps')">Launch</button>
+                </div>
+                <div class="game-card">
+                    <h2>Space Proxy</h2>
+                    <p style="color: #00aaff; font-size: 0.9em;">Another powerful web proxy</p>
+                    <button onclick="loadContent('https://dash.ddnssec.de', 'apps')">Launch</button>
+                </div>
+                <div class="game-card">
+                    <h2>DaydreamX Proxy</h2>
+                    <p style="color: #00aaff; font-size: 0.9em;">Advanced web proxy & unblocker</p>
+                    <button onclick="loadContent('https://shop.ddnssec.de/', 'apps')">Launch</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instructions Section -->
+        <div id="instructions-section" class="section" style="display: none;">
+            <button class="back-btn" onclick="showHome()">← Back</button>
+            <h1 class="section-title">How to Play Games</h1>
+            
+            <div style="padding: 40px; max-width: 800px; margin: 0 auto; text-align: left; color: #00ffff; font-size: 1.2em; line-height: 1.8;">
+                <p>To play any game on restricted networks (like school):</p>
+                <ol>
+                    <li>Go to the <strong>Games</strong> tab.</li>
+                    <li>Find your game and click <strong>Copy Link</strong> — the URL is now in your clipboard!</li>
+                    <li>Go to the <strong>Apps</strong> tab and click <strong>Launch</strong> on any proxy (Interstellar recommended).</li>
+                    <li>In the proxy window, paste the copied link into the search bar and press Enter.</li>
+                    <li>Be aware of ads, close any ads that may pop up (they could be a virus)</li>
+                    <li>The game will load safely through the proxy — enjoy!</li>
+                </ol>
+                <p><strong>Tip:</strong> If one proxy is slow or blocked, try another. Interstellar usually works best for games.</p>
+                <p>Copy Link buttons make it super easy — no typing URLs!</p>
             </div>
         </div>
 
@@ -98,19 +161,27 @@
             <button class="back-overlay" onclick="hideContent()">← Back</button>
             <div id="loading-spinner" class="loading-spinner">
                 <div class="spinner"></div>
-                <p>Loading Game...</p>
+                <p>Loading...</p>
             </div>
             <iframe id="content-iframe" frameborder="0" allowfullscreen allow="fullscreen" onload="document.getElementById('loading-spinner').style.display='none';"></iframe>
         </div>
     </div>
 
     <script>
-        // === YOUR FIREBASE CONFIG - CHANGE THIS ===
+        // Copy Link Function
+        function copyLink(url) {
+            navigator.clipboard.writeText(url).then(() => {
+                alert('Link copied to clipboard! Paste it into a proxy in the Apps tab.');
+            }).catch(() => {
+                prompt('Copy this link:', url);
+            });
+        }
+
+        // Your full Firebase and other code (unchanged from your last working version)
         const firebaseConfig = {
-            databaseURL: "https://vortex-eb4a0-default-rtdb.firebaseio.com/"  // ← Replace with your actual URL
+            databaseURL: "https://vortex-eb4a0-default-rtdb.firebaseio.com/"
         };
 
-        // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
         const adminRef = db.ref('adminPasswords');
@@ -119,13 +190,11 @@
 
         let isAdmin = false;
 
-        // Load data on start
         window.onload = () => {
             document.getElementById('main-site').style.display = 'none';
             document.getElementById('admin-panel').style.display = 'none';
             document.getElementById('login-screen').style.display = 'block';
 
-            // Listen for real-time updates
             logRef.on('value', (snapshot) => {
                 const logs = snapshot.val() || [];
                 updateActivityLog(logs);
@@ -161,7 +230,6 @@
         function checkPassword() {
             const input = document.getElementById('password-input').value.trim();
 
-            // Check admin first
             adminRef.once('value').then(snapshot => {
                 const admins = snapshot.val() || ['vortexontopfr'];
                 if (admins.includes(input)) {
@@ -172,7 +240,6 @@
                     return;
                 }
 
-                // Then check user
                 userRef.once('value').then(snapshot2 => {
                     const users = snapshot2.val() || [];
                     if (users.includes(input)) {
@@ -186,6 +253,13 @@
                 });
             });
         }
+
+        // Press Enter key to submit password
+        document.getElementById('password-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
 
         function showMainSite() {
             document.getElementById('login-screen').style.display = 'none';
@@ -230,7 +304,6 @@
             const pass = document.getElementById('delete-pass').value.trim();
             if (!pass) return alert('Enter a password');
 
-            // Try admin first
             adminRef.transaction(current => {
                 if (current && current.includes(pass)) {
                     return current.filter(p => p !== pass);
@@ -258,13 +331,13 @@
             hideContent();
         }
 
-        // Your existing navigation, player, and trail effect code (unchanged)
         let currentSection = '';
 
         function showHome() {
             document.getElementById('home-screen').style.display = 'flex';
             document.getElementById('games-section').style.display = 'none';
             document.getElementById('apps-section').style.display = 'none';
+            document.getElementById('instructions-section').style.display = 'none';
             document.getElementById('player').style.display = 'none';
         }
 
@@ -272,6 +345,7 @@
             document.getElementById('home-screen').style.display = 'none';
             document.getElementById('games-section').style.display = section === 'games' ? 'block' : 'none';
             document.getElementById('apps-section').style.display = section === 'apps' ? 'block' : 'none';
+            document.getElementById('instructions-section').style.display = section === 'instructions' ? 'block' : 'none';
         }
 
         function loadContent(url, section) {
@@ -285,6 +359,7 @@
             player.style.display = 'flex';
             document.getElementById('games-section').style.display = 'none';
             document.getElementById('apps-section').style.display = 'none';
+            document.getElementById('instructions-section').style.display = 'none';
         }
 
         function hideContent() {
@@ -298,6 +373,8 @@
                 document.getElementById('games-section').style.display = 'block';
             } else if (currentSection === 'apps') {
                 document.getElementById('apps-section').style.display = 'block';
+            } else if (currentSection === 'instructions') {
+                document.getElementById('instructions-section').style.display = 'block';
             }
         }
 
