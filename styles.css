@@ -257,7 +257,7 @@ body {
     z-index: 2000;
 }
 
-.login-box {
+.form-box {
     background: #001122;
     padding: 40px;
     border: 3px solid #00ffff;
@@ -266,7 +266,7 @@ body {
     box-shadow: 0 0 50px #00ffff;
 }
 
-.login-box input {
+.form-box input {
     padding: 15px;
     width: 80%;
     margin: 20px 0;
@@ -277,7 +277,7 @@ body {
     border-radius: 10px;
 }
 
-.login-box button {
+.form-box button {
     padding: 15px 40px;
     background: #00aaff;
     color: #000;
