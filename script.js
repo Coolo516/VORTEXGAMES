@@ -1,3 +1,4 @@
+
 let currentSection = '';
 
 function showHome() {
