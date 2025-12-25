@@ -8,167 +8,383 @@
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom, #000000, #0a0a0a);
+            color: #00ffff;
+            overflow-x: hidden;
+        }
+
+        /* SIDE-BY-SIDE LAYOUT */
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* LEFT LOGO SECTION */
+        .logo-section {
+            flex: 0 0 250px;
+            background: #001122;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            border-right: 2px solid #00ffff;
+        }
+
+        .logo-section img {
+            width: 200px;
+            height: auto;
+            margin: 20px 0;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* RIGHT CONTENT SECTION */
+        .content-section {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* ===== LOGIN & SIGNUP & ADMIN BOX ===== */
+        .form-box, .admin-box {
+            background: rgba(0, 0, 34, 0.85);
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 0 20px #00ffff;
+        }
+
+        input {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: none;
+            width: 80%;
+            background: #001122;
+            color: #00ffff;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin-top: 10px;
+            border-radius: 8px;
+            border: none;
+            background: #00ffff;
+            color: #000;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: #00aaff;
+        }
+
+        /* ===== SECTIONS ===== */
+        .game-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .game-card {
+            background: rgba(0, 0, 34, 0.7);
+            border: 1px solid #00ffff;
+            border-radius: 12px;
+            padding: 15px;
+            margin: 10px;
+            width: 200px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px #00ffff;
+        }
+
+        .back-btn {
+            margin: 15px;
+            background: #ff4444;
+            color: #fff;
+        }
+
+        /* ===== PLAYER (IFRAME) ===== */
+        #player {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000000ee;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        #content-iframe {
+            width: 90%;
+            height: 80%;
+            border: none;
+            border-radius: 12px;
+        }
+
+        .back-overlay {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            background: #ff4444;
+            color: #fff;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .loading-spinner .spinner {
+            border: 6px solid #00ffff33;
+            border-top: 6px solid #00ffff;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg);}
+            100% { transform: rotate(360deg);}
+        }
+
+        /* ===== TRAIL PARTICLES ===== */
+        .trail-particle {
+            position: fixed;
+            background: #00ffff;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.8;
+            animation: fade 1.5s forwards;
+        }
+
+        @keyframes fade {
+            0% { opacity: 0.8; transform: translate(0,0); }
+            100% { opacity: 0; transform: translate(50px,50px); }
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Password Login Screen -->
-    <div id="login-screen">
-        <div class="login-box">
-            <h1 class="title">VORTEX</h1>
-            <p>Enter Password</p>
-            <input type="password" id="password-input" placeholder="Password" autocomplete="off">
-            <button onclick="checkPassword()">Enter</button>
-            <p id="error-msg" style="color: red; margin-top: 10px; display: none;">Wrong password!</p>
-        </div>
+<div class="container">
+    <!-- LEFT LOGO -->
+    <div class="logo-section">
+        <img src="newlogo.png" alt="Vortex Logo">
+        <h2>VORTEX</h2>
     </div>
 
-    <!-- Admin Panel -->
-    <div id="admin-panel" style="display: none;">
-        <div class="admin-box">
-            <h2>Admin Panel</h2>
-
-            <div style="margin-bottom: 20px;">
-                <input type="text" id="new-admin-pass" placeholder="New Admin Password">
-                <button onclick="addAdminPassword()">Add Admin Password</button>
+    <!-- RIGHT CONTENT -->
+    <div class="content-section">
+        <!-- WELCOME SCREEN -->
+        <div id="welcome-screen">
+            <div class="form-box">
+                <h2>Welcome to VORTEX</h2>
+                <button onclick="showSignup()">Sign Up</button>
+                <button onclick="showLogin()">Login</button>
             </div>
-            <div style="margin-bottom: 20px;">
-                <input type="text" id="new-user-pass" placeholder="New User Password">
-                <button onclick="addUserPassword()">Add User Password</button>
-            </div>
-
-            <div style="margin-bottom: 30px;">
-                <input type="text" id="delete-pass" placeholder="Type password to delete">
-                <button onclick="deletePassword()" style="background: #ff4444;">Delete Password</button>
-            </div>
-
-            <h3 style="margin-top: 30px;">Activity Log</h3>
-            <div id="activity-log" style="max-height: 300px; overflow-y: auto; background: #001122; padding: 15px; border-radius: 10px; border: 1px solid #00ffff;">
-                Loading logs...
-            </div>
-
-            <button onclick="logout()" style="margin-top: 30px; background: #ff0000;">Back to Login</button>
         </div>
+
+        <!-- SIGNUP SCREEN -->
+        <div id="signup-screen" style="display: none;">
+            <div class="form-box">
+                <p>Sign Up</p>
+                <input type="text" id="signup-username" placeholder="Username" autocomplete="off">
+                <input type="password" id="signup-password" placeholder="Password" autocomplete="off">
+                <input type="text" id="signup-key" placeholder="Key" autocomplete="off">
+                <button onclick="signup()">Create Account</button>
+                <p id="signup-error" style="color: red; margin-top: 10px; display: none;">Error</p>
+            </div>
+        </div>
+
+        <!-- LOGIN SCREEN -->
+        <div id="login-screen" style="display: none;">
+            <div class="form-box">
+                <p>Login</p>
+                <input type="text" id="login-username" placeholder="Username" autocomplete="off">
+                <input type="password" id="login-password" placeholder="Password" autocomplete="off">
+                <button onclick="login()">Enter</button>
+                <p id="login-error" style="color: red; margin-top: 10px; display: none;">Error</p>
+            </div>
+        </div>
+
+        <!-- Admin Panel -->
+<div id="admin-panel" style="display: none;">
+    <div class="admin-box">
+        <h2>Admin Panel</h2>
+
+        <div style="margin-bottom: 20px;">
+            <input type="text" id="new-admin-key" placeholder="New Admin Key">
+            <button onclick="addAdminKey()">Add Admin Key</button>
+        </div>
+        <div style="margin-bottom: 20px;">
+            <input type="text" id="new-user-key" placeholder="New User Key">
+            <button onclick="addUserKey()">Add User Key</button>
+        </div>
+
+        <div style="margin-bottom: 30px;">
+            <input type="text" id="delete-key" placeholder="Type key to delete">
+            <button onclick="deleteKey()" style="background: #ff4444;">Delete Key</button>
+        </div>
+
+        <!-- NEW: Accounts List Section -->
+        <h3 style="margin-top: 40px;">Registered Accounts</h3>
+        <div id="accounts-list" style="max-height: 300px; overflow-y: auto; background: #001122; padding: 15px; border-radius: 10px; border: 1px solid #00ffff; text-align: left;">
+            Loading accounts...
+        </div>
+
+        <h3 style="margin-top: 40px;">Activity Log</h3>
+        <div id="activity-log" style="max-height: 300px; overflow-y: auto; background: #001122; padding: 15px; border-radius: 10px; border: 1px solid #00ffff;">
+            Loading logs...
+        </div>
+
+        <button onclick="logout()" style="margin-top: 30px; background: #ff0000;">Back to Login</button>
     </div>
+</div>
 
-    <!-- Main Site -->
-    <div id="main-site" style="display: none;">
-        <button class="logout-btn" onclick="logout()">Logout</button>
+        <!-- Main Site -->
+        <div id="main-site" style="display: none;">
+            <button class="logout-btn" onclick="logout()">Logout</button>
 
-        <!-- Home Screen -->
-        <div id="home-screen">
-            <h1 class="title">VORTEX</h1>
-            <p class="subtitle">Unleash the Power</p>
-            <div class="options">
-                <button onclick="showSection('games')">Games</button>
-                <button onclick="showSection('apps')">Apps</button>
-                <button onclick="showSection('instructions')">Instructions</button>
-                <button onclick="showAdmin()" id="admin-btn" style="display: none;">Admin Panel</button>
+            <!-- Home Screen -->
+            <div id="home-screen">
+                <h1 class="title">VORTEX</h1>
+                <p class="subtitle">Unleash the Power</p>
+                <div class="options">
+                    <button onclick="showSection('games')">Games</button>
+                    <button onclick="showSection('apps')">Apps</button>
+                    <button onclick="showSection('instructions')">Instructions</button>
+                    <button onclick="showAdmin()" id="admin-btn" style="display: none;">Admin Panel</button>
+                </div>
             </div>
-        </div>
 
-        <!-- Games Section -->
-        <div id="games-section" class="section" style="display: none;">
-            <button class="back-btn" onclick="showHome()">← Back</button>
-            <h1 class="section-title">VORTEX Games</h1>
-            
-            <div class="game-list">
-                <!-- FNAF Series -->
-                <div class="game-card"><h2>Five Nights at Freddy's 1</h2><button onclick="copyLink('https://irv77.github.io/hd_fnaf/1/')">Copy Link</button></div>
-                <div class="game-card"><h2>Five Nights at Freddy's 2</h2><button onclick="copyLink('https://irv77.github.io/hd_fnaf/2/')">Copy Link</button></div>
-                <div class="game-card"><h2>Five Nights at Freddy's 3</h2><button onclick="copyLink('https://irv77.github.io/hd_fnaf/3/')">Copy Link</button></div>
-                <div class="game-card"><h2>Five Nights at Freddy's 4</h2><button onclick="copyLink('https://irv77.github.io/hd_fnaf/4/')">Copy Link</button></div>
-                <div class="game-card"><h2>Five Nights at Freddy's World</h2><button onclick="copyLink('https://irv77.github.io/hd_fnaf/w/')">Copy Link</button></div>
+            <!-- Games Section -->
+            <div id="games-section" class="section" style="display: none;">
+                <button class="back-btn" onclick="showHome()">← Back</button>
+                <h1 class="section-title">VORTEX Games</h1>
                 
-                <!-- Geometry Dash -->
-                <div class="game-card"><h2>Geometry Dash</h2><p style="color: #00aaff; font-size: 0.9em;">Rhythm platformer</p><button onclick="copyLink('https://geometrydash-lite.io')">Copy Link</button></div>
+                <div class="game-list">
+                    <!-- FNAF Series -->
+                    <div class="game-card"><h2>Five Nights at Freddy's 1</h2><button onclick="copyLink('https://irv77.github.io/hd_fnaf/1/')">Copy Link</button></div>
+                    <div class="game-card"><h2>Five Nights at Freddy's 2</h2><button onclick="copyLink('https://irv77.github.io/hd_fnaf/2/')">Copy Link</button></div>
+                    <div class="game-card"><h2>Five Nights at Freddy's 3</h2><button onclick="copyLink('https://irv77.github.io/hd_fnaf/3/')">Copy Link</button></div>
+                    <div class="game-card"><h2>Five Nights at Freddy's 4</h2><button onclick="copyLink('https://irv77.github.io/hd_fnaf/4/')">Copy Link</button></div>
+                    <div class="game-card"><h2>Five Nights at Freddy's World</h2><button onclick="copyLink('https://irv77.github.io/hd_fnaf/w/')">Copy Link</button></div>
+                    
+                    <!-- Geometry Dash -->
+                    <div class="game-card"><h2>Geometry Dash</h2><p style="color: #00aaff; font-size: 0.9em;">Rhythm platformer</p><button onclick="copyLink('https://geometrydash-lite.io')">Copy Link</button></div>
+                    
+                    <!-- All Other Games -->
+                    <div class="game-card"><h2>Slope</h2><p style="color: #00aaff; font-size: 0.9em;">Endless high-speed ball rolling</p><button onclick="copyLink('https://slope3.com/')">Copy Link</button></div>
+                    <div class="game-card"><h2>Retro Bowl</h2><p style="color: #00aaff; font-size: 0.9em;">Retro football management</p><button onclick="copyLink('https://retrobowl.me/')">Copy Link</button></div>
+                    <div class="game-card"><h2>Basketball Stars</h2><p style="color: #00aaff; font-size: 0.9em;">1v1 basketball showdowns</p><button onclick="copyLink('https://basketball-stars.io/')">Copy Link</button></div>
+                    <div class="game-card"><h2>Moto X3M</h2><p style="color: #00aaff; font-size: 0.9em;">Insane bike stunts</p><button onclick="copyLink('https://unblocked-games.s3.amazonaws.com/moto-x3m.html')">Copy Link</button></div>
+                    <div class="game-card"><h2>Run 3</h2><p style="color: #00aaff; font-size: 0.9em;">Endless space runner</p><button onclick="copyLink('https://run-3online.github.io/')">Copy Link</button></div>
+                    <div class="game-card"><h2>1v1.LOL</h2><p style="color: #00aaff; font-size: 0.9em;">Building & shooting battle</p><button onclick="copyLink('https://1v1-lol-online.github.io')">Copy Link</button></div>
+                    <div class="game-card"><h2>Shell Shockers</h2><p style="color: #00aaff; font-size: 0.9em;">Egg-based FPS chaos</p><button onclick="copyLink('https://shellshock.io/')">Copy Link</button></div>
+                    <div class="game-card"><h2>Krunker</h2><p style="color: #00aaff; font-size: 0.9em;">Fast-paced voxel FPS</p><button onclick="copyLink('https://krunker.io/')">Copy Link</button></div>
+                    <div class="game-card"><h2>Paper.io 2</h2><p style="color: #00aaff; font-size: 0.9em;">Conquer the map</p><button onclick="copyLink('https://paper-io.com/')">Copy Link</button></div>
+                    <div class="game-card"><h2>Hole.io</h2><p style="color: #00aaff; font-size: 0.9em;">Eat the city as a black hole</p><button onclick="copyLink('https://hole-io.com/')">Copy Link</button></div>
+                    <div class="game-card"><h2>Smash Karts</h2><p style="color: #00aaff; font-size: 0.9em;">Kart racing with weapons</p><button onclick="copyLink('https://smashkarts.io/')">Copy Link</button></div>
+                    <div class="game-card"><h2>Monkey Mart</h2><p style="color: #00aaff; font-size: 0.9em;">Manage your monkey store</p><button onclick="copyLink('https://monkey-mart.io/')">Copy Link</button></div>
+                    <div class="game-card"><h2>Temple Run 2</h2><p style="color: #00aaff; font-size: 0.9em;">Endless temple escape</p><button onclick="copyLink('https://templerun.ee/')">Copy Link</button></div>
+                    <div class="game-card"><h2>Subway Surfers</h2><p style="color: #00aaff; font-size: 0.9em;">Iconic endless runner</p><button onclick="copyLink('https://subway-surfers.gg/')">Copy Link</button></div>
+                    <div class="game-card"><h2>Bloons TD 6</h2><p style="color: #00aaff; font-size: 0.9em;">Epic tower defense</p><button onclick="copyLink('https://ninjakiwi.com/Games/Bloons-Tower-Defense/Bloons-TD-6.html')">Copy Link</button></div>
+                    <div class="game-card"><h2>Among Us</h2><p style="color: #00aaff; font-size: 0.9em;">Social deduction multiplayer</p><button onclick="copyLink('https://amongusonline.io/')">Copy Link</button></div>
+                    <div class="game-card"><h2>Bitlife</h2><p style="color: #00aaff; font-size: 0.9em;">Life choices simulator</p><button onclick="copyLink('https://bitlifeonline.io/')">Copy Link</button></div>
+                    <div class="game-card"><h2>Cookie Clicker</h2><p style="color: #00aaff; font-size: 0.9em;">Idle baking empire</p><button onclick="copyLink('https://cookieclicker.ee/')">Copy Link</button></div>
+                    <div class="game-card"><h2>Drift Hunters</h2><p style="color: #00aaff; font-size: 0.9em;">Car drifting mastery</p><button onclick="copyLink('https://drifthunters.io/')">Copy Link</button></div>
+                    <div class="game-card"><h2>OvO</h2><p style="color: #00aaff; font-size: 0.9em;">Precision platformer</p><button onclick="copyLink('https://ovo-game.com/')">Copy Link</button></div>
+                    <div class="game-card"><h2>Tetris</h2><p style="color: #00aaff; font-size: 0.9em;">Classic block puzzle</p><button onclick="copyLink('https://tetrisunblocked.org/')">Copy Link</button></div>
+                    <div class="game-card"><h2>Basket Random</h2><p style="color: #00aaff; font-size: 0.9em;">Wacky physics basketball</p><button onclick="copyLink('https://basketrandom.io/')">Copy Link</button></div>
+                    <div class="game-card"><h2>Doodle Jump</h2><p style="color: #00aaff; font-size: 0.9em;">Endless jumping adventure</p><button onclick="copyLink('https://doodlejump.io/')">Copy Link</button></div>
+                    <div class="game-card"><h2>Fireboy and Watergirl</h2><p style="color: #00aaff; font-size: 0.9em;">Co-op element puzzles</p><button onclick="copyLink('https://fireboyandwatergirl.io/')">Copy Link</button></div>
+                    <div class="game-card"><h2>Happy Wheels</h2><p style="color: #00aaff; font-size: 0.9em;">Ragdoll physics mayhem</p><button onclick="copyLink('https://happywheels.io/')">Copy Link</button></div>
+                    <div class="game-card"><h2>Tanuki Sunset</h2><p style="color: #00aaff; font-size: 0.9em;">Raccoon skateboarding</p><button onclick="copyLink('https://tanukisunset.io/')">Copy Link</button></div>
+                </div>
+            </div>
+
+            <!-- Apps Section -->
+            <div id="apps-section" class="section" style="display: none;">
+                <button class="back-btn" onclick="showHome()">← Back</button>
+                <h1 class="section-title">VORTEX Apps</h1>
                 
-                <!-- All Other Games -->
-                <div class="game-card"><h2>Slope</h2><p style="color: #00aaff; font-size: 0.9em;">Endless high-speed ball rolling</p><button onclick="copyLink('https://slope3.com/')">Copy Link</button></div>
-                <div class="game-card"><h2>Retro Bowl</h2><p style="color: #00aaff; font-size: 0.9em;">Retro football management</p><button onclick="copyLink('https://retrobowl.me/')">Copy Link</button></div>
-                <div class="game-card"><h2>Basketball Stars</h2><p style="color: #00aaff; font-size: 0.9em;">1v1 basketball showdowns</p><button onclick="copyLink('https://basketball-stars.io/')">Copy Link</button></div>
-                <div class="game-card"><h2>Moto X3M</h2><p style="color: #00aaff; font-size: 0.9em;">Insane bike stunts</p><button onclick="copyLink('https://unblocked-games.s3.amazonaws.com/moto-x3m.html')">Copy Link</button></div>
-                <div class="game-card"><h2>Run 3</h2><p style="color: #00aaff; font-size: 0.9em;">Endless space runner</p><button onclick="copyLink('https://run-3online.github.io/')">Copy Link</button></div>
-                <div class="game-card"><h2>1v1.LOL</h2><p style="color: #00aaff; font-size: 0.9em;">Building & shooting battle</p><button onclick="copyLink('https://1v1-lol-online.github.io')">Copy Link</button></div>
-                <div class="game-card"><h2>Shell Shockers</h2><p style="color: #00aaff; font-size: 0.9em;">Egg-based FPS chaos</p><button onclick="copyLink('https://shellshock.io/')">Copy Link</button></div>
-                <div class="game-card"><h2>Krunker</h2><p style="color: #00aaff; font-size: 0.9em;">Fast-paced voxel FPS</p><button onclick="copyLink('https://krunker.io/')">Copy Link</button></div>
-                <div class="game-card"><h2>Paper.io 2</h2><p style="color: #00aaff; font-size: 0.9em;">Conquer the map</p><button onclick="copyLink('https://paper-io.com/')">Copy Link</button></div>
-                <div class="game-card"><h2>Hole.io</h2><p style="color: #00aaff; font-size: 0.9em;">Eat the city as a black hole</p><button onclick="copyLink('https://hole-io.com/')">Copy Link</button></div>
-                <div class="game-card"><h2>Smash Karts</h2><p style="color: #00aaff; font-size: 0.9em;">Kart racing with weapons</p><button onclick="copyLink('https://smashkarts.io/')">Copy Link</button></div>
-                <div class="game-card"><h2>Monkey Mart</h2><p style="color: #00aaff; font-size: 0.9em;">Manage your monkey store</p><button onclick="copyLink('https://monkey-mart.io/')">Copy Link</button></div>
-                <div class="game-card"><h2>Temple Run 2</h2><p style="color: #00aaff; font-size: 0.9em;">Endless temple escape</p><button onclick="copyLink('https://templerun.ee/')">Copy Link</button></div>
-                <div class="game-card"><h2>Subway Surfers</h2><p style="color: #00aaff; font-size: 0.9em;">Iconic endless runner</p><button onclick="copyLink('https://subway-surfers.gg/')">Copy Link</button></div>
-                <div class="game-card"><h2>Bloons TD 6</h2><p style="color: #00aaff; font-size: 0.9em;">Epic tower defense</p><button onclick="copyLink('https://ninjakiwi.com/Games/Bloons-Tower-Defense/Bloons-TD-6.html')">Copy Link</button></div>
-                <div class="game-card"><h2>Among Us</h2><p style="color: #00aaff; font-size: 0.9em;">Social deduction multiplayer</p><button onclick="copyLink('https://amongusonline.io/')">Copy Link</button></div>
-                <div class="game-card"><h2>Bitlife</h2><p style="color: #00aaff; font-size: 0.9em;">Life choices simulator</p><button onclick="copyLink('https://bitlifeonline.io/')">Copy Link</button></div>
-                <div class="game-card"><h2>Cookie Clicker</h2><p style="color: #00aaff; font-size: 0.9em;">Idle baking empire</p><button onclick="copyLink('https://cookieclicker.ee/')">Copy Link</button></div>
-                <div class="game-card"><h2>Drift Hunters</h2><p style="color: #00aaff; font-size: 0.9em;">Car drifting mastery</p><button onclick="copyLink('https://drifthunters.io/')">Copy Link</button></div>
-                <div class="game-card"><h2>OvO</h2><p style="color: #00aaff; font-size: 0.9em;">Precision platformer</p><button onclick="copyLink('https://ovo-game.com/')">Copy Link</button></div>
-                <div class="game-card"><h2>Tetris</h2><p style="color: #00aaff; font-size: 0.9em;">Classic block puzzle</p><button onclick="copyLink('https://tetrisunblocked.org/')">Copy Link</button></div>
-                <div class="game-card"><h2>Basket Random</h2><p style="color: #00aaff; font-size: 0.9em;">Wacky physics basketball</p><button onclick="copyLink('https://basketrandom.io/')">Copy Link</button></div>
-                <div class="game-card"><h2>Doodle Jump</h2><p style="color: #00aaff; font-size: 0.9em;">Endless jumping adventure</p><button onclick="copyLink('https://doodlejump.io/')">Copy Link</button></div>
-                <div class="game-card"><h2>Fireboy and Watergirl</h2><p style="color: #00aaff; font-size: 0.9em;">Co-op element puzzles</p><button onclick="copyLink('https://fireboyandwatergirl.io/')">Copy Link</button></div>
-                <div class="game-card"><h2>Happy Wheels</h2><p style="color: #00aaff; font-size: 0.9em;">Ragdoll physics mayhem</p><button onclick="copyLink('https://happywheels.io/')">Copy Link</button></div>
-                <div class="game-card"><h2>Tanuki Sunset</h2><p style="color: #00aaff; font-size: 0.9em;">Raccoon skateboarding</p><button onclick="copyLink('https://tanukisunset.io/')">Copy Link</button></div>
+                <div class="game-list">
+                    <div class="game-card">
+                        <h2>Interstellar Proxy</h2>
+                        <p style="color: #00aaff; font-size: 0.9em;">Fast proxy with games & cloaking</p>
+                        <button onclick="loadContent('https://interstellar-fr.vercel.app', 'apps')">Launch</button>
+                    </div>
+                    <div class="game-card">
+                        <h2>Space Proxy</h2>
+                        <p style="color: #00aaff; font-size: 0.9em;">Another powerful web proxy</p>
+                        <button onclick="loadContent('https://dash.ddnssec.de', 'apps')">Launch</button>
+                    </div>
+                    <div class="game-card">
+                        <h2>DaydreamX Proxy</h2>
+                        <p style="color: #00aaff; font-size: 0.9em;">Advanced web proxy & unblocker</p>
+                        <button onclick="loadContent('https://cart.dyndnssec.de', 'apps')">Launch</button>
+                    </div>
+                     <div class="game-card">
+                        <h2>PeteZah Proxy</h2>
+                        <p style="color: #00aaff; font-size: 0.9em;">Another powerful web proxy</p>
+                        <button onclick="loadContent('https://tell-iisilly-for-more-links.v119.com', 'apps')">Launch</button>
+                    </div>
+                    
+                </div>
             </div>
-        </div>
 
-        <!-- Apps Section -->
-        <div id="apps-section" class="section" style="display: none;">
-            <button class="back-btn" onclick="showHome()">← Back</button>
-            <h1 class="section-title">VORTEX Apps</h1>
-            
-            <div class="game-list">
-                <div class="game-card">
-                    <h2>Interstellar Proxy</h2>
-                    <p style="color: #00aaff; font-size: 0.9em;">Fast proxy with games & cloaking</p>
-                    <button onclick="loadContent('https://interstellar-fr.vercel.app', 'apps')">Launch</button>
-                </div>
-                <div class="game-card">
-                    <h2>Space Proxy</h2>
-                    <p style="color: #00aaff; font-size: 0.9em;">Another powerful web proxy</p>
-                    <button onclick="loadContent('https://dash.ddnssec.de', 'apps')">Launch</button>
-                </div>
-                <div class="game-card">
-                    <h2>DaydreamX Proxy</h2>
-                    <p style="color: #00aaff; font-size: 0.9em;">Advanced web proxy & unblocker</p>
-                    <button onclick="loadContent('https://cart.dyndnssec.de', 'apps')">Launch</button>
-                </div>
-                 <div class="game-card">
-                    <h2>PeteZah Proxy</h2>
-                    <p style="color: #00aaff; font-size: 0.9em;">Another powerful web proxy</p>
-                    <button onclick="loadContent('https://tell-iisilly-for-more-links.v119.com', 'apps')">Launch</button>
+            <!-- Instructions Section -->
+            <div id="instructions-section" class="section" style="display: none;">
+                <button class="back-btn" onclick="showHome()">← Back</button>
+                <h1 class="section-title">How to Play Games</h1>
+                
+                <div style="padding: 40px; max-width: 800px; margin: 0 auto; text-align: left; color: #00ffff; font-size: 1.2em; line-height: 1.8;">
+                    <p>To play any game on restricted networks (like school):</p>
+                    <ol>
+                        <li>Go to the <strong>Games</strong> tab.</li>
+                        <li>Find your game and click <strong>Copy Link</strong> — the URL is now in your clipboard!</li>
+                        <li>Go to the <strong>Apps</strong> tab and click <strong>Launch</strong> on any proxy (Interstellar recommended).</li>
+                        <li>In the proxy window, paste the copied link into the search bar and press Enter.</li>
+                        <li>Be aware of ads, close any ads that may pop up (they could be a virus)</li>
+                        <li>The game will load safely through the proxy — enjoy!</li>
+                    </ol>
+                    <p><strong>Tip:</strong> If one proxy is slow or blocked, try another. Interstellar usually works best for games.</p>
+                    <p>Copy Link buttons make it super easy — no typing URLs!</p>
                 </div>
             </div>
-        </div>
 
-        <!-- Instructions Section -->
-        <div id="instructions-section" class="section" style="display: none;">
-            <button class="back-btn" onclick="showHome()">← Back</button>
-            <h1 class="section-title">How to Play Games</h1>
-            
-            <div style="padding: 40px; max-width: 800px; margin: 0 auto; text-align: left; color: #00ffff; font-size: 1.2em; line-height: 1.8;">
-                <p>To play any game on restricted networks (like school):</p>
-                <ol>
-                    <li>Go to the <strong>Games</strong> tab.</li>
-                    <li>Find your game and click <strong>Copy Link</strong> — the URL is now in your clipboard!</li>
-                    <li>Go to the <strong>Apps</strong> tab and click <strong>Launch</strong> on any proxy (Interstellar recommended).</li>
-                    <li>In the proxy window, paste the copied link into the search bar and press Enter.</li>
-                    <li>Be aware of ads, close any ads that may pop up (they could be a virus)</li>
-                    <li>The game will load safely through the proxy — enjoy!</li>
-                </ol>
-                <p><strong>Tip:</strong> If one proxy is slow or blocked, try another. Interstellar usually works best for games.</p>
-                <p>Copy Link buttons make it super easy — no typing URLs!</p>
+            <!-- Full-Screen Player -->
+            <div id="player" class="player" style="display: none;">
+                <button class="back-overlay" onclick="hideContent()">← Back</button>
+                <div id="loading-spinner" class="loading-spinner">
+                    <div class="spinner"></div>
+                    <p>Loading...</p>
+                </div>
+                <iframe id="content-iframe" frameborder="0" allowfullscreen allow="fullscreen" onload="document.getElementById('loading-spinner').style.display='none';"></iframe>
             </div>
-        </div>
-
-        <!-- Full-Screen Player -->
-        <div id="player" class="player" style="display: none;">
-            <button class="back-overlay" onclick="hideContent()">← Back</button>
-            <div id="loading-spinner" class="loading-spinner">
-                <div class="spinner"></div>
-                <p>Loading...</p>
-            </div>
-            <iframe id="content-iframe" frameborder="0" allowfullscreen allow="fullscreen" onload="document.getElementById('loading-spinner').style.display='none';"></iframe>
         </div>
     </div>
 
@@ -182,23 +398,27 @@
             });
         }
 
-        // Your full Firebase and other code (unchanged from your last working version)
+        // Your full Firebase and other code
         const firebaseConfig = {
             databaseURL: "https://vortex-eb4a0-default-rtdb.firebaseio.com/"
         };
 
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
-        const adminRef = db.ref('adminPasswords');
-        const userRef = db.ref('userPasswords');
+        const adminKeysRef = db.ref('adminKeys');
+        const userKeysRef = db.ref('userKeys');
+        const accountsRef = db.ref('accounts');
         const logRef = db.ref('activityLog');
 
-        let isAdmin = false;
+        let currentIsAdmin = false;
+        let currentSection = '';
 
         window.onload = () => {
             document.getElementById('main-site').style.display = 'none';
             document.getElementById('admin-panel').style.display = 'none';
-            document.getElementById('login-screen').style.display = 'block';
+            document.getElementById('signup-screen').style.display = 'none';
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('welcome-screen').style.display = 'block';
 
             logRef.on('value', (snapshot) => {
                 const logs = snapshot.val() || [];
@@ -219,11 +439,11 @@
             if (logs.length === 0) logDiv.innerHTML = 'No activity yet.';
         }
 
-        function logLogin(passwordUsed) {
+        function logActivity(msg) {
             const now = new Date();
             const time = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
             const date = now.toLocaleDateString();
-            const entry = `Login successful! Password: ${passwordUsed} | Time: ${time} | Date: ${date}`;
+            const entry = `${msg} (${date} ${time})`;
 
             logRef.transaction(current => {
                 if (!current) current = [];
@@ -232,97 +452,180 @@
             });
         }
 
-        function checkPassword() {
-            const input = document.getElementById('password-input').value.trim();
+        function showSignup() {
+            document.getElementById('welcome-screen').style.display = 'none';
+            document.getElementById('signup-screen').style.display = 'block';
+            document.getElementById('signup-error').style.display = 'none';
+        }
 
-            adminRef.once('value').then(snapshot => {
-                const admins = snapshot.val() || ['vortexontopfr'];
-                if (admins.includes(input)) {
-                    isAdmin = true;
-                    logLogin(input);
-                    showMainSite();
-                    document.getElementById('admin-btn').style.display = 'block';
+        function showLogin() {
+            document.getElementById('welcome-screen').style.display = 'none';
+            document.getElementById('login-screen').style.display = 'block';
+            document.getElementById('login-error').style.display = 'none';
+        }
+
+        function signup() {
+            const username = document.getElementById('signup-username').value.trim();
+            const password = document.getElementById('signup-password').value.trim();
+            const key = document.getElementById('signup-key').value.trim();
+            const errorElem = document.getElementById('signup-error');
+
+            if (!username || !password || !key) {
+                errorElem.textContent = 'All fields are required!';
+                errorElem.style.display = 'block';
+                return;
+            }
+
+            accountsRef.child(username).once('value').then(snap => {
+                if (snap.exists()) {
+                    errorElem.textContent = 'Username already exists!';
+                    errorElem.style.display = 'block';
                     return;
                 }
 
-                userRef.once('value').then(snapshot2 => {
-                    const users = snapshot2.val() || [];
-                    if (users.includes(input)) {
-                        isAdmin = false;
-                        logLogin(input);
-                        showMainSite();
-                        document.getElementById('admin-btn').style.display = 'none';
-                    } else {
-                        document.getElementById('error-msg').style.display = 'block';
+                adminKeysRef.once('value').then(adminSnap => {
+                    let adminKeys = adminSnap.val() || ['vortexontopfr'];
+                    const isAdminKey = adminKeys.includes(key);
+
+                    if (isAdminKey) {
+                        adminKeysRef.set(adminKeys.filter(k => k !== key));
+                        createAccount(username, password, true, key);
+                        return;
                     }
+
+                    userKeysRef.once('value').then(userSnap => {
+                        let userKeys = userSnap.val() || [];
+                        const isUserKey = userKeys.includes(key);
+
+                        if (isUserKey) {
+                            userKeysRef.set(userKeys.filter(k => k !== key));
+                            createAccount(username, password, false, key);
+                        } else {
+                            errorElem.textContent = 'Invalid key!';
+                            errorElem.style.display = 'block';
+                        }
+                    });
                 });
             });
         }
 
-        // Press Enter key to submit password
-        document.getElementById('password-input').addEventListener('keypress', function(e) {
+        function createAccount(username, password, isAdmin, key) {
+            accountsRef.child(username).set({
+                password: password,
+                isAdmin: isAdmin,
+                keyUsed: key
+            }).then(() => {
+                logActivity(`Account created with username: ${username} Password: ${password} Key to account: ${key}`);
+                showMainSite(isAdmin);
+            });
+        }
+
+        function login() {
+            const username = document.getElementById('login-username').value.trim();
+            const password = document.getElementById('login-password').value.trim();
+            const errorElem = document.getElementById('login-error');
+
+            if (!username || !password) {
+                errorElem.textContent = 'All fields are required!';
+                errorElem.style.display = 'block';
+                return;
+            }
+
+            accountsRef.child(username).once('value').then(snap => {
+                if (!snap.exists()) {
+                    errorElem.textContent = 'Invalid username!';
+                    errorElem.style.display = 'block';
+                    return;
+                }
+
+                const account = snap.val();
+                if (account.password !== password) {
+                    errorElem.textContent = 'Wrong password!';
+                    errorElem.style.display = 'block';
+                    return;
+                }
+
+                logActivity(`Login with username: ${username} Password: ${password} Key to account: ${account.keyUsed}`);
+                showMainSite(account.isAdmin);
+            });
+        }
+
+        // Press Enter key to submit for signup and login
+        document.getElementById('signup-key').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
-                checkPassword();
+                signup();
             }
         });
 
-        function showMainSite() {
+        document.getElementById('login-password').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                login();
+            }
+        });
+
+        function showMainSite(isAdmin) {
+            currentIsAdmin = isAdmin;
+            document.getElementById('welcome-screen').style.display = 'none';
+            document.getElementById('signup-screen').style.display = 'none';
             document.getElementById('login-screen').style.display = 'none';
             document.getElementById('main-site').style.display = 'block';
+            document.getElementById('admin-btn').style.display = isAdmin ? 'block' : 'none';
             showHome();
         }
 
-        function showAdmin() {
-            document.getElementById('main-site').style.display = 'none';
-            document.getElementById('admin-panel').style.display = 'block';
-        }
+function showAdmin() {
+    if (!currentIsAdmin) return;
+    document.getElementById('main-site').style.display = 'none';
+    document.getElementById('admin-panel').style.display = 'block';
+    updateAccountsList();  // Add this line
+}
 
-        function addAdminPassword() {
-            const pass = document.getElementById('new-admin-pass').value.trim();
-            if (!pass) return alert('Enter a password');
+        function addAdminKey() {
+            const key = document.getElementById('new-admin-key').value.trim();
+            if (!key) return alert('Enter a key');
 
-            adminRef.transaction(current => {
+            adminKeysRef.transaction(current => {
                 if (!current) current = ['vortexontopfr'];
-                if (!current.includes(pass)) current.push(pass);
+                if (!current.includes(key)) current.push(key);
                 return current;
             }).then(() => {
-                alert('Admin password added!');
-                document.getElementById('new-admin-pass').value = '';
+                alert('Admin key added!');
+                document.getElementById('new-admin-key').value = '';
             });
         }
 
-        function addUserPassword() {
-            const pass = document.getElementById('new-user-pass').value.trim();
-            if (!pass) return alert('Enter a password');
+        function addUserKey() {
+            const key = document.getElementById('new-user-key').value.trim();
+            if (!key) return alert('Enter a key');
 
-            userRef.transaction(current => {
+            userKeysRef.transaction(current => {
                 if (!current) current = [];
-                if (!current.includes(pass)) current.push(pass);
+                if (!current.includes(key)) current.push(key);
                 return current;
             }).then(() => {
-                alert('User password added!');
-                document.getElementById('new-user-pass').value = '';
+                alert('User key added!');
+                document.getElementById('new-user-key').value = '';
             });
         }
 
-        function deletePassword() {
-            const pass = document.getElementById('delete-pass').value.trim();
-            if (!pass) return alert('Enter a password');
+        function deleteKey() {
+            const key = document.getElementById('delete-key').value.trim();
+            if (!key) return alert('Enter a key');
 
-            adminRef.transaction(current => {
-                if (current && current.includes(pass)) {
-                    return current.filter(p => p !== pass);
+            adminKeysRef.transaction(current => {
+                if (current && current.includes(key)) {
+                    return current.filter(k => k !== key);
                 }
                 return current;
             }).then(() => {
-                userRef.transaction(current => {
-                    if (current && current.includes(pass)) {
-                        return current.filter(p => p !== pass);
+                userKeysRef.transaction(current => {
+                    if (current && current.includes(key)) {
+                        return current.filter(k => k !== key);
                     }
                     return current;
                 }).then(() => {
-                    alert('Password deleted if it existed!');
-                    document.getElementById('delete-pass').value = '';
+                    alert('Key deleted if it existed!');
+                    document.getElementById('delete-key').value = '';
                 });
             });
         }
@@ -330,13 +633,11 @@
         function logout() {
             document.getElementById('main-site').style.display = 'none';
             document.getElementById('admin-panel').style.display = 'none';
-            document.getElementById('login-screen').style.display = 'block';
-            document.getElementById('password-input').value = '';
-            document.getElementById('error-msg').style.display = 'none';
+            document.getElementById('signup-screen').style.display = 'none';
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('welcome-screen').style.display = 'block';
             hideContent();
         }
-
-        let currentSection = '';
 
         function showHome() {
             document.getElementById('home-screen').style.display = 'flex';
@@ -382,6 +683,38 @@
                 document.getElementById('instructions-section').style.display = 'block';
             }
         }
+        function updateAccountsList() {
+    const listDiv = document.getElementById('accounts-list');
+    listDiv.innerHTML = 'Loading accounts...';
+
+    accountsRef.once('value').then(snapshot => {
+        listDiv.innerHTML = '';
+        if (!snapshot.exists() || snapshot.numChildren() === 0) {
+            listDiv.innerHTML = 'No accounts yet.';
+            return;
+        }
+
+        const accounts = [];
+        snapshot.forEach(child => {
+            const data = child.val();
+            const username = child.key;
+            const type = data.isAdmin ? 'Admin' : 'User';
+            const keyUsed = data.keyUsed || 'Unknown';
+            accounts.push(`<strong>${username}</strong> - Type: ${type} - Key used: ${keyUsed}`);
+        });
+
+        // Sort alphabetically by username
+        accounts.sort().forEach(entry => {
+            const p = document.createElement('p');
+            p.innerHTML = entry;
+            p.style.margin = '8px 0';
+            p.style.fontSize = '0.9em';
+            listDiv.appendChild(p);
+        });
+    }).catch(err => {
+        listDiv.innerHTML = 'Error loading accounts: ' + err.message;
+    });
+}
 
         // Continuous Blue Trail Effect
         document.addEventListener('mousemove', (e) => {
@@ -411,5 +744,3 @@
     </script>
 </body>
 </html>
-
-
