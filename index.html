@@ -185,6 +185,42 @@
             0% { opacity: 0.8; transform: translate(0,0); }
             100% { opacity: 0; transform: translate(50px,50px); }
         }
+
+        /* ===== NOTES SECTION STYLES ===== */
+        #notes-section {
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #notes-textarea {
+            width: 90%;
+            max-width: 900px;
+            height: 500px;
+            background: #001122;
+            color: #00ffff;
+            border: 2px solid #00ffff;
+            border-radius: 10px;
+            padding: 15px;
+            font-size: 1.1em;
+            resize: vertical;
+            overflow-y: auto;
+            box-shadow: 0 0 20px #00ffff;
+        }
+
+        #notes-textarea:focus {
+            outline: none;
+            box-shadow: 0 0 30px #00ffff;
+        }
+
+        #char-count {
+            margin-top: 10px;
+            font-size: 1em;
+            color: #00aaff;
+        }
     </style>
 </head>
 <body>
@@ -231,38 +267,37 @@
         </div>
 
         <!-- Admin Panel -->
-<div id="admin-panel" style="display: none;">
-    <div class="admin-box">
-        <h2>Admin Panel</h2>
+        <div id="admin-panel" style="display: none;">
+            <div class="admin-box">
+                <h2>Admin Panel</h2>
 
-        <div style="margin-bottom: 20px;">
-            <input type="text" id="new-admin-key" placeholder="New Admin Key">
-            <button onclick="addAdminKey()">Add Admin Key</button>
-        </div>
-        <div style="margin-bottom: 20px;">
-            <input type="text" id="new-user-key" placeholder="New User Key">
-            <button onclick="addUserKey()">Add User Key</button>
-        </div>
+                <div style="margin-bottom: 20px;">
+                    <input type="text" id="new-admin-key" placeholder="New Admin Key">
+                    <button onclick="addAdminKey()">Add Admin Key</button>
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <input type="text" id="new-user-key" placeholder="New User Key">
+                    <button onclick="addUserKey()">Add User Key</button>
+                </div>
 
-        <div style="margin-bottom: 30px;">
-            <input type="text" id="delete-key" placeholder="Type key to delete">
-            <button onclick="deleteKey()" style="background: #ff4444;">Delete Key</button>
-        </div>
+                <div style="margin-bottom: 30px;">
+                    <input type="text" id="delete-key" placeholder="Type key to delete">
+                    <button onclick="deleteKey()" style="background: #ff4444;">Delete Key</button>
+                </div>
 
-        <!-- NEW: Accounts List Section -->
-        <h3 style="margin-top: 40px;">Registered Accounts</h3>
-        <div id="accounts-list" style="max-height: 300px; overflow-y: auto; background: #001122; padding: 15px; border-radius: 10px; border: 1px solid #00ffff; text-align: left;">
-            Loading accounts...
-        </div>
+                <h3 style="margin-top: 40px;">Registered Accounts</h3>
+                <div id="accounts-list" style="max-height: 300px; overflow-y: auto; background: #001122; padding: 15px; border-radius: 10px; border: 1px solid #00ffff; text-align: left;">
+                    Loading accounts...
+                </div>
 
-        <h3 style="margin-top: 40px;">Activity Log</h3>
-        <div id="activity-log" style="max-height: 300px; overflow-y: auto; background: #001122; padding: 15px; border-radius: 10px; border: 1px solid #00ffff;">
-            Loading logs...
-        </div>
+                <h3 style="margin-top: 40px;">Activity Log</h3>
+                <div id="activity-log" style="max-height: 300px; overflow-y: auto; background: #001122; padding: 15px; border-radius: 10px; border: 1px solid #00ffff;">
+                    Loading logs...
+                </div>
 
-        <button onclick="logout()" style="margin-top: 30px; background: #ff0000;">Back to Login</button>
-    </div>
-</div>
+                <button onclick="logout()" style="margin-top: 30px; background: #ff0000;">Back to Login</button>
+            </div>
+        </div>
 
         <!-- Main Site -->
         <div id="main-site" style="display: none;">
@@ -275,6 +310,7 @@
                 <div class="options">
                     <button onclick="showSection('games')">Games</button>
                     <button onclick="showSection('apps')">Apps</button>
+                    <button onclick="showSection('notes')">Notes</button>
                     <button onclick="showSection('instructions')">Instructions</button>
                     <button onclick="showAdmin()" id="admin-btn" style="display: none;">Admin Panel</button>
                 </div>
@@ -340,20 +376,27 @@
                     <div class="game-card">
                         <h2>Space Proxy</h2>
                         <p style="color: #00aaff; font-size: 0.9em;">Another powerful web proxy</p>
-                        <button onclick="loadContent('https://dash.ddnssec.de', 'apps')">Launch</button>
+                        <button onclick="loadContent('https://gointospace.app', 'apps')">Launch</button>
                     </div>
                     <div class="game-card">
                         <h2>DaydreamX Proxy</h2>
                         <p style="color: #00aaff; font-size: 0.9em;">Advanced web proxy & unblocker</p>
-                        <button onclick="loadContent('https://cart.dyndnssec.de', 'apps')">Launch</button>
+                        <button onclick="loadContent('https://daydreamx.pro', 'apps')">Launch</button>
                     </div>
-                     <div class="game-card">
+                    <div class="game-card">
                         <h2>PeteZah Proxy</h2>
                         <p style="color: #00aaff; font-size: 0.9em;">Another powerful web proxy</p>
                         <button onclick="loadContent('https://tell-iisilly-for-more-links.v119.com', 'apps')">Launch</button>
                     </div>
-                    
                 </div>
+            </div>
+
+            <!-- Notes Section (NEW) -->
+            <div id="notes-section" class="section" style="display: none;">
+                <button class="back-btn" onclick="showHome()">← Back</button>
+                <h1 class="section-title">My Notes</h1>
+                <textarea id="notes-textarea" maxlength="5000" placeholder="Type your notes here... (saved automatically)"></textarea>
+                <p id="char-count">0 / 5000</p>
             </div>
 
             <!-- Instructions Section -->
@@ -398,7 +441,7 @@
             });
         }
 
-        // Your full Firebase and other code
+        // Firebase setup
         const firebaseConfig = {
             databaseURL: "https://vortex-eb4a0-default-rtdb.firebaseio.com/"
         };
@@ -412,6 +455,7 @@
 
         let currentIsAdmin = false;
         let currentSection = '';
+        let currentUsername = '';
 
         window.onload = () => {
             document.getElementById('main-site').style.display = 'none';
@@ -510,10 +554,12 @@
         }
 
         function createAccount(username, password, isAdmin, key) {
+            currentUsername = username;
             accountsRef.child(username).set({
                 password: password,
                 isAdmin: isAdmin,
-                keyUsed: key
+                keyUsed: key,
+                notes: ""  // initialize empty notes
             }).then(() => {
                 logActivity(`Account created with username: ${username} Password: ${password} Key to account: ${key}`);
                 showMainSite(isAdmin);
@@ -545,22 +591,19 @@
                     return;
                 }
 
+                currentUsername = username;
                 logActivity(`Login with username: ${username} Password: ${password} Key to account: ${account.keyUsed}`);
                 showMainSite(account.isAdmin);
             });
         }
 
-        // Press Enter key to submit for signup and login
+        // Press Enter key to submit
         document.getElementById('signup-key').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                signup();
-            }
+            if (e.key === 'Enter') signup();
         });
 
         document.getElementById('login-password').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                login();
-            }
+            if (e.key === 'Enter') login();
         });
 
         function showMainSite(isAdmin) {
@@ -573,12 +616,12 @@
             showHome();
         }
 
-function showAdmin() {
-    if (!currentIsAdmin) return;
-    document.getElementById('main-site').style.display = 'none';
-    document.getElementById('admin-panel').style.display = 'block';
-    updateAccountsList();  // Add this line
-}
+        function showAdmin() {
+            if (!currentIsAdmin) return;
+            document.getElementById('main-site').style.display = 'none';
+            document.getElementById('admin-panel').style.display = 'block';
+            updateAccountsList();
+        }
 
         function addAdminKey() {
             const key = document.getElementById('new-admin-key').value.trim();
@@ -631,6 +674,7 @@ function showAdmin() {
         }
 
         function logout() {
+            currentUsername = '';
             document.getElementById('main-site').style.display = 'none';
             document.getElementById('admin-panel').style.display = 'none';
             document.getElementById('signup-screen').style.display = 'none';
@@ -643,6 +687,7 @@ function showAdmin() {
             document.getElementById('home-screen').style.display = 'flex';
             document.getElementById('games-section').style.display = 'none';
             document.getElementById('apps-section').style.display = 'none';
+            document.getElementById('notes-section').style.display = 'none';
             document.getElementById('instructions-section').style.display = 'none';
             document.getElementById('player').style.display = 'none';
         }
@@ -651,7 +696,12 @@ function showAdmin() {
             document.getElementById('home-screen').style.display = 'none';
             document.getElementById('games-section').style.display = section === 'games' ? 'block' : 'none';
             document.getElementById('apps-section').style.display = section === 'apps' ? 'block' : 'none';
+            document.getElementById('notes-section').style.display = section === 'notes' ? 'block' : 'none';
             document.getElementById('instructions-section').style.display = section === 'instructions' ? 'block' : 'none';
+
+            if (section === 'notes') {
+                loadNotes();
+            }
         }
 
         function loadContent(url, section) {
@@ -665,6 +715,7 @@ function showAdmin() {
             player.style.display = 'flex';
             document.getElementById('games-section').style.display = 'none';
             document.getElementById('apps-section').style.display = 'none';
+            document.getElementById('notes-section').style.display = 'none';
             document.getElementById('instructions-section').style.display = 'none';
         }
 
@@ -679,42 +730,90 @@ function showAdmin() {
                 document.getElementById('games-section').style.display = 'block';
             } else if (currentSection === 'apps') {
                 document.getElementById('apps-section').style.display = 'block';
+            } else if (currentSection === 'notes') {
+                document.getElementById('notes-section').style.display = 'block';
             } else if (currentSection === 'instructions') {
                 document.getElementById('instructions-section').style.display = 'block';
             }
         }
-        function updateAccountsList() {
-    const listDiv = document.getElementById('accounts-list');
-    listDiv.innerHTML = 'Loading accounts...';
 
-    accountsRef.once('value').then(snapshot => {
-        listDiv.innerHTML = '';
-        if (!snapshot.exists() || snapshot.numChildren() === 0) {
-            listDiv.innerHTML = 'No accounts yet.';
-            return;
+        function updateAccountsList() {
+            const listDiv = document.getElementById('accounts-list');
+            listDiv.innerHTML = 'Loading accounts...';
+
+            accountsRef.once('value').then(snapshot => {
+                listDiv.innerHTML = '';
+                if (!snapshot.exists() || snapshot.numChildren() === 0) {
+                    listDiv.innerHTML = 'No accounts yet.';
+                    return;
+                }
+
+                const accounts = [];
+                snapshot.forEach(child => {
+                    const data = child.val();
+                    const username = child.key;
+                    const type = data.isAdmin ? 'Admin' : 'User';
+                    const keyUsed = data.keyUsed || 'Unknown';
+                    accounts.push(`<strong>${username}</strong> - Type: ${type} - Key used: ${keyUsed}`);
+                });
+
+                accounts.sort().forEach(entry => {
+                    const p = document.createElement('p');
+                    p.innerHTML = entry;
+                    p.style.margin = '8px 0';
+                    p.style.fontSize = '0.9em';
+                    listDiv.appendChild(p);
+                });
+            }).catch(err => {
+                listDiv.innerHTML = 'Error loading accounts: ' + err.message;
+            });
         }
 
-        const accounts = [];
-        snapshot.forEach(child => {
-            const data = child.val();
-            const username = child.key;
-            const type = data.isAdmin ? 'Admin' : 'User';
-            const keyUsed = data.keyUsed || 'Unknown';
-            accounts.push(`<strong>${username}</strong> - Type: ${type} - Key used: ${keyUsed}`);
-        });
+        // ===== NOTES FUNCTIONALITY =====
+        function loadNotes() {
+            if (!currentUsername) return;
+            const textarea = document.getElementById('notes-textarea');
+            const charCount = document.getElementById('char-count');
+            
+            accountsRef.child(currentUsername).child('notes').once('value').then(snap => {
+                const notes = snap.val() || '';
+                textarea.value = notes;
+                charCount.textContent = `${notes.length} / 5000`;
+            });
+        }
 
-        // Sort alphabetically by username
-        accounts.sort().forEach(entry => {
-            const p = document.createElement('p');
-            p.innerHTML = entry;
-            p.style.margin = '8px 0';
-            p.style.fontSize = '0.9em';
-            listDiv.appendChild(p);
+        function saveNotes() {
+            if (!currentUsername) return;
+            const notes = document.getElementById('notes-textarea').value;
+            accountsRef.child(currentUsername).update({ notes: notes });
+        }
+
+        function debounce(func, delay) {
+            let timeout;
+            return function(...args) {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(this, args), delay);
+            };
+        }
+
+        // Attach notes event listeners when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            const textarea = document.getElementById('notes-textarea');
+            const charCount = document.getElementById('char-count');
+            if (!textarea || !charCount) return;
+
+            const debouncedSave = debounce(saveNotes, 800);
+
+            textarea.addEventListener('input', () => {
+                const length = textarea.value.length;
+                charCount.textContent = `${length} / 5000`;
+                if (length > 5000) {
+                    textarea.value = textarea.value.slice(0, 5000);
+                    charCount.textContent = '5000 / 5000';
+                }
+                debouncedSave();
+            });
         });
-    }).catch(err => {
-        listDiv.innerHTML = 'Error loading accounts: ' + err.message;
-    });
-}
 
         // Continuous Blue Trail Effect
         document.addEventListener('mousemove', (e) => {
